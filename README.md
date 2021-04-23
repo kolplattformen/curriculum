@@ -12,11 +12,11 @@ Translations of curriculum codes to clear text descriptions
 import parse from '@skolplattformen/curriculum'
 
 // Swedish
-parse('sv', 'MU') // { code: 'MU', category: '', name: 'Musik' }
-parse('sv', 'M1SP') // { code: 'M1SP', category: 'Moderna språk, elevens val', name: 'Spanska' }
-parse('sv', 'M2TY') // { code: 'M2TY', category: 'Moderna språk, språkval', name: 'Tyska' }
-parse('sv', 'MLSMI') // { code: 'M2TY', category: 'Modersmål', name: 'Samiska' }
+parse('MU', 'sv') // { code: 'MU', category: '', name: 'Musik' }
+parse('M1SP', 'sv') // { code: 'M1SP', category: 'Moderna språk, elevens val', name: 'Spanska' }
+parse('M2TY', 'sv') // { code: 'M2TY', category: 'Moderna språk, språkval', name: 'Tyska' }
+parse('MLSMI', 'sv') // { code: 'M2TY', category: 'Modersmål', name: 'Samiska' }
 
 // English
-parse('en', 'MU') // { code: 'MU', category: '', name: 'Music' }
+parse('MU', 'en') // { code: 'MU', category: '', name: 'Music' }
 ```
