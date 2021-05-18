@@ -9,12 +9,12 @@ export interface Subject {
 
 type Parser = (translation: Translation, code: string) => Subject | null
 const parseSubject: Parser = ({ subjects }, code) => {
-  if (!subjects[code]) return null
+  if (subjects == null || !subjects[code]) return null
 
   return {
     code,
     category: '',
-    name: subjects[code] as string,
+    name: subjects[code] || (code as string),
   }
 }
 
@@ -22,28 +22,33 @@ const parseTrainingSubject: Parser = (
   { categories, traningsskolaSubjects },
   code
 ) => {
-  if (!traningsskolaSubjects[code]) return null
+  if (traningsskolaSubjects == null || !traningsskolaSubjects[code]) return null
 
   return {
     code,
-    category: categories.trainingSchool,
-    name: traningsskolaSubjects[code] as string,
+    category: categories?.trainingSchool || categories?.unknown || '',
+    name:
+      traningsskolaSubjects != null && traningsskolaSubjects[code]
+        ? traningsskolaSubjects[code]
+        : (code as string),
   }
 }
 
 const parseLanguage: Parser = ({ categories, languages }, code) => {
   if (!code.startsWith('M1') && !code.startsWith('M2')) return null
-  const category = `${categories.modernLanguages}, ${
+  const category = `${
+    categories?.modernLanguages || categories?.unknown || ''
+  }, ${
     code.startsWith('M1')
-      ? categories.modernLanguagesA1
-      : categories.modernLanguagesA2
+      ? categories?.modernLanguagesA1 || categories?.unknown || ''
+      : categories?.modernLanguagesA2 || categories?.unknown || ''
   }`
   const language = code.substr(2)
 
   return {
     code,
     category,
-    name: languages[language] || categories.unknown,
+    name: (languages && languages[language]) || code,
   }
 }
 
@@ -53,8 +58,8 @@ const parseAltLanguage: Parser = ({ categories, languages }, code) => {
 
   return {
     code,
-    category: categories.modernLanguagesAlt,
-    name: languages[language] || categories.unknown,
+    category: categories?.modernLanguagesAlt || categories?.unknown || '',
+    name: (languages && languages[language]) || code,
   }
 }
 
@@ -64,17 +69,17 @@ const parseNativeLanguage: Parser = ({ categories, languages }, code) => {
 
   return {
     code,
-    category: categories.motherTounge,
-    name: languages[language] || categories.unknown,
+    category: categories?.motherTounge || categories?.unknown || '',
+    name: (languages && languages[language]) || code,
   }
 }
 
 const parseMisc: Parser = ({ categories, misc }, code) => {
-  if (!misc[code]) return null
+  if (misc == null || !misc[code]) return null
 
   return {
     code,
-    category: categories.misc,
+    category: categories?.misc || categories?.unknown || '',
     name: misc[code] as string,
   }
 }
@@ -89,7 +94,7 @@ const parse = (code: string, lang: Language = 'sv'): Subject => {
     parseNativeLanguage(translation, subjectCode) ||
     parseMisc(translation, subjectCode) || {
       code: subjectCode,
-      category: translation.categories.unknown,
+      category: translation.categories?.unknown || '',
       name: subjectCode,
     }
   if (rest.length) result.comment = rest.join(' ').trim()
