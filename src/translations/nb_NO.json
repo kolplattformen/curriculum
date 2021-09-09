@@ -44,13 +44,18 @@
     "misc": {
         "Prandium": "Lunsj",
         "Lunch": "Lunsj",
-        "Rast": "Pause"
+        "Rast": "Pause",
+        "MTID": "Mentortid"
     },
     "categories": {
         "misc": "Ymse",
         "unknown": "Ukjent",
         "modernLanguages": "Moderne språk",
-        "motherTounge": "Morsmålsopplæring"
+        "motherTounge": "Morsmålsopplæring",
+        "modernLanguagesAlt": "Alt moderne språk, språkvalg",
+        "modernLanguagesA2": "Språkvalg",
+        "modernLanguagesA1": "Elevens valg",
+        "trainingSchool": "Grunnskole for elever med lærevansker"
     },
     "specialLanguages": {
         "TY": "Tysk",
